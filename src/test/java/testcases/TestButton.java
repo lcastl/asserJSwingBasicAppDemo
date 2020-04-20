@@ -28,24 +28,32 @@ public class TestButton {
     }
 
     @Test
-    public void testClick() throws InterruptedException {
+    public void testClick() {
         JButtonFixture button = window.button(textMatcherButton);
+        waitForButtonEnabled(button);
+        button.click();
+        JTextComponentFixture textArea = window.textBox(textAreaMatcher);
+        waitForTextAreaIsVisible(textArea);
+        System.out.println(textArea.text());
+        Assert.assertEquals(textArea.text(), "Welcome IntelliJ IDEA Swing Creator\n");
+    }
+
+    public void waitForButtonEnabled(JButtonFixture button) {
         pause(new Condition("waitButtonEnabled") {
             @Override
             public boolean test() {
                 return execute(button::isEnabled);
             }
         }, timeout(1000));
-        button.click();
-        JTextComponentFixture textArea = window.textBox(textAreaMatcher);
+    }
+
+    public void waitForTextAreaIsVisible(JTextComponentFixture textArea) {
         pause(new Condition("waitTextAreaEnabled") {
             @Override
             public boolean test() {
                 return !textArea.text().isEmpty();
             }
         }, timeout(1000));
-        System.out.println(textArea.text());
-        Assert.assertEquals(textArea.text(), "Welcome IntelliJ IDEA Swing Creator\n");
     }
 
     public GenericTypeMatcher<JButton> textMatcherButton = new GenericTypeMatcher<JButton>(JButton.class) {
