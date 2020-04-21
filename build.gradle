@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'application'
 }
 
 repositories {
@@ -13,6 +14,7 @@ repositories {
 
 dependencies {
     testImplementation 'org.assertj:assertj-swing-testng:3.9.2'
+    compile 'com.intellij:forms_rt:7.0.3' //compiler of intellij to run a form
 }
 
 group = 'pl.dmichalski'
