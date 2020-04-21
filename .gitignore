@@ -3,4 +3,5 @@ target/
 *.iml
 .gradle/
 build/
-.DS_Storeg
+.DS_Store
+out/
